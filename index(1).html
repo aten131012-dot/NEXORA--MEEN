@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXORA X MEEN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#eef0ff;--bg2:#dde2ff;--glow1:rgba(140,110,255,.35);--glow2:rgba(0,180,216,.28);
+  --ink:#1b1d3a;--muted:#555b8a;--card:rgba(255,255,255,.7);--line:rgba(90,80,210,.28);
+  --accent:#6c4cff;--accent2:#00a8d0;--star:#5b5fc7;--code-bg:#12142e;--code-ink:#cfe3ff;--btn-ink:#fff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#05060f;--bg2:#0d0b24;--glow1:rgba(120,80,255,.30);--glow2:rgba(0,200,255,.18);
+    --ink:#eef1ff;--muted:#9aa3d6;--card:rgba(18,20,50,.62);--line:rgba(140,150,255,.28);
+    --accent:#8b6cff;--accent2:#33d6ff;--star:#ffffff;--code-bg:#080a1c;--code-ink:#cfe3ff;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#05060f;--bg2:#0d0b24;--glow1:rgba(120,80,255,.30);--glow2:rgba(0,200,255,.18);
+  --ink:#eef1ff;--muted:#9aa3d6;--card:rgba(18,20,50,.62);--line:rgba(140,150,255,.28);
+  --accent:#8b6cff;--accent2:#33d6ff;--star:#ffffff;--code-bg:#080a1c;--code-ink:#cfe3ff;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:'Prompt',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 0%,var(--glow1),transparent 55%),
+    radial-gradient(ellipse at 95% 100%,var(--glow2),transparent 55%),
+    linear-gradient(var(--bg1),var(--bg2));
+  background-color:var(--bg1);
+  display:flex;align-items:center;justify-content:center;padding:28px 16px;
+  overflow-x:hidden;
+}
+#stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.shoot{position:fixed;top:12%;left:-10%;width:120px;height:2px;z-index:0;opacity:0;
+  background:linear-gradient(90deg,transparent,var(--accent2));transform:rotate(22deg);
+  animation:shoot 7s ease-in 1s infinite}
+.shoot.b{top:48%;animation-delay:4.5s;animation-duration:9s}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(22deg)}4%{opacity:1}
+  14%{opacity:0;transform:translate(120vw,50vw) rotate(22deg)}100%{opacity:0}}
+.card{
+  position:relative;z-index:1;width:100%;max-width:440px;padding:84px 22px 24px;margin-top:60px;
+  background:var(--card);border:1px solid var(--line);border-radius:26px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 20px 60px -20px rgba(80,60,255,.45);text-align:center;
+}
+.planet{
+  position:absolute;top:-62px;left:50%;width:110px;height:110px;margin-left:-55px;
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#ffd6a5 0,#ff8fb1 28%,#7b4dff 62%,#2a1a7a 100%);
+  box-shadow:inset -14px -10px 24px rgba(0,0,0,.4),0 0 40px rgba(139,108,255,.55);
+  animation:float 5s ease-in-out infinite;
+}
+.planet::before{
+  content:"";position:absolute;left:-34px;right:-34px;top:42px;height:28px;
+  border:3px solid rgba(255,255,255,.7);border-radius:50%;transform:rotate(-16deg);
+  box-shadow:0 0 14px rgba(51,214,255,.6);
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.chip{font-size:11px;letter-spacing:.12em;padding:4px 10px;border-radius:99px;
+  border:1px solid var(--line);color:var(--accent2);font-weight:500;text-transform:uppercase}
+h1{
+  font-family:'Orbitron','Prompt',sans-serif;font-weight:800;font-size:clamp(22px,6.4vw,32px);
+  margin:0 0 8px;letter-spacing:.04em;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.desc{margin:0 0 18px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.code-wrap{position:relative;text-align:left;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--code-bg)}
+.code-top{display:flex;align-items:center;gap:6px;padding:8px 12px;
+  border-bottom:1px solid rgba(140,150,255,.18);font-size:11px;color:#8d96cf;letter-spacing:.1em}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot:nth-child(1){background:#ff5f7a}.dot:nth-child(2){background:#ffc857}.dot:nth-child(3){background:#4be3a5}
+.code-top span{margin-left:auto}
+pre{margin:0;padding:14px;max-height:220px;overflow:auto;color:var(--code-ink);
+  font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  white-space:pre-wrap;word-break:break-all;-webkit-user-select:all;user-select:all}
+.btn{
+  margin-top:16px;width:100%;border:0;cursor:pointer;padding:15px;border-radius:14px;
+  font:600 16px 'Prompt',system-ui,sans-serif;color:var(--btn-ink);
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 10px 28px -8px var(--accent);transition:transform .15s,filter .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn:hover{filter:brightness(1.1)}
+.btn.ok{background:linear-gradient(90deg,#1fbf8f,#33d6ff)}
+.foot{margin-top:14px;font-size:12px;color:var(--muted)}
+.cat{position:fixed;top:0;left:0;width:84px;z-index:2;pointer-events:none;animation:roam 32s ease-in-out infinite;will-change:transform}
+.cat svg{display:block;width:100%;height:auto;overflow:visible;animation:bob 3.2s ease-in-out infinite;filter:drop-shadow(0 0 10px var(--accent))}
+@keyframes roam{
+  0%,100%{transform:translate(6vw,72vh) rotate(-6deg)}
+  22%{transform:translate(68vw,58vh) rotate(7deg)}
+  46%{transform:translate(72vw,14vh) rotate(-5deg)}
+  72%{transform:translate(14vw,24vh) rotate(8deg)}
+}
+@keyframes bob{0%,100%{transform:translateY(-6px) rotate(-3deg)}50%{transform:translateY(8px) rotate(3deg)}}
+.eye{fill:#ff1744;filter:drop-shadow(0 0 3px #ff1744);transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.tail{transform-box:fill-box;transform-origin:0% 100%;animation:wag 2.4s ease-in-out infinite}
+@keyframes wag{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(10deg)}}
+@media (prefers-reduced-motion:reduce){.planet,.shoot,.cat,.cat svg,.eye,.tail{animation:none}.cat{transform:translate(6vw,72vh)}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<i class="shoot"></i><i class="shoot b"></i>
+
+<div class="cat" aria-hidden="true">
+  <svg viewBox="0 0 100 112" xmlns="http://www.w3.org/2000/svg" stroke="#c4bfff" stroke-width="1.5" stroke-linejoin="round">
+    <g class="tail" fill="none" stroke-linecap="round">
+      <path d="M72 92 Q96 90 90 62" stroke="#c4bfff" stroke-width="11"/>
+      <path d="M72 92 Q96 90 90 62" stroke="#fff" stroke-width="8"/>
+    </g>
+    <ellipse cx="50" cy="88" rx="26" ry="20" fill="#fff"/>
+    <ellipse cx="38" cy="104" rx="8" ry="5" fill="#fff"/>
+    <ellipse cx="62" cy="104" rx="8" ry="5" fill="#fff"/>
+    <polygon points="22,34 26,6 47,24" fill="#fff"/>
+    <polygon points="78,34 74,6 53,24" fill="#fff"/>
+    <polygon points="28,28 30,15 40,24" fill="#ffc2d4" stroke="none"/>
+    <polygon points="72,28 70,15 60,24" fill="#ffc2d4" stroke="none"/>
+    <ellipse cx="50" cy="50" rx="31" ry="27" fill="#fff"/>
+    <ellipse class="eye" cx="37" cy="49" rx="7" ry="8" stroke="none"/>
+    <ellipse class="eye" cx="63" cy="49" rx="7" ry="8" stroke="none"/>
+    <ellipse cx="37" cy="49" rx="1.8" ry="6" fill="#1a0008" stroke="none"/>
+    <ellipse cx="63" cy="49" rx="1.8" ry="6" fill="#1a0008" stroke="none"/>
+    <circle cx="34.5" cy="45.5" r="1.8" fill="#fff" stroke="none"/>
+    <circle cx="60.5" cy="45.5" r="1.8" fill="#fff" stroke="none"/>
+    <polygon points="46.5,58 53.5,58 50,62.5" fill="#ff8fb1" stroke="none"/>
+    <path d="M50 62.5 Q46 67 41 64 M50 62.5 Q54 67 59 64" fill="none" stroke="#c9a3b4" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M30 60 L12 56 M30 64 L12 66 M70 60 L88 56 M70 64 L88 66" fill="none" stroke="#c4bfff" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<main class="card">
+  <div class="planet"></div>
+  <div class="chips"><span class="chip">Single Script</span><span class="chip">Ready to copy</span></div>
+  <h1 id="name">NEXORA X MEEN</h1>
+  <p class="desc" id="desc">กดปุ่มด้านล่างเพื่อคัดลอกสคริปต์ แล้วนำไปใช้ได้เลย</p>
+
+  <div class="code-wrap">
+    <div class="code-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>SCRIPT</span></div>
+    <pre id="code"></pre>
+  </div>
+
+  <button class="btn" id="copy">🚀 คัดลอกสคริปต์</button>
+  <div class="foot">✦ แตะที่กล่องโค้ดเพื่อเลือกทั้งหมดได้เช่นกัน ✦</div>
+</main>
+
+<script>
+// ===== แก้ตรงนี้ =====
+const CONFIG = {
+  name: "NEXORA X MEEN",
+  desc: "กดปุ่มด้านล่างเพื่อคัดลอกสคริปต์ แล้วนำไปใช้ได้เลย",
+  code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/aten131012-dot/NEXORA-X-MEEN/refs/heads/main/NEXORA_MEEN-2.lua.txt"))()'
+};
+// =====================
+document.getElementById('name').textContent = CONFIG.name;
+document.getElementById('desc').textContent = CONFIG.desc;
+const codeEl = document.getElementById('code');
+codeEl.textContent = CONFIG.code;
+
+const btn = document.getElementById('copy');
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+  document.body.appendChild(ta); ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  return ok;
+}
+btn.addEventListener('click', async () => {
+  let ok = false;
+  try { await navigator.clipboard.writeText(CONFIG.code); ok = true; }
+  catch(e) { ok = fallbackCopy(CONFIG.code); }
+  if (!ok) {
+    const r = document.createRange(); r.selectNodeContents(codeEl);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  btn.textContent = ok ? '✓ คัดลอกแล้ว!' : 'เลือกข้อความแล้ว กดคัดลอกเอง';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = '🚀 คัดลอกสคริปต์'; btn.classList.remove('ok'); }, 2200);
+});
+
+// Twinkling stars
+const cv = document.getElementById('stars'), cx = cv.getContext('2d');
+let W, H, stars = [];
+function init(){
+  const d = window.devicePixelRatio || 1;
+  W = innerWidth; H = innerHeight;
+  cv.width = W * d; cv.height = H * d;
+  cx.setTransform(d, 0, 0, d, 0, 0);
+  stars = Array.from({length: Math.round(W * H / 7000)}, () => ({
+    x: Math.random() * W, y: Math.random() * H,
+    r: Math.random() * 1.5 + .3, p: Math.random() * 6.28, s: Math.random() * .02 + .005
+  }));
+}
+function draw(){
+  cx.clearRect(0, 0, W, H);
+  cx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--star').trim() || '#fff';
+  for (const t of stars){
+    t.p += t.s;
+    cx.globalAlpha = .25 + .75 * Math.abs(Math.sin(t.p));
+    cx.beginPath(); cx.arc(t.x, t.y, t.r, 0, 6.28); cx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+addEventListener('resize', init);
+init(); draw();
+</script>
+</body>
+</html>
